@@ -1,3 +1,4 @@
+import argparse
 from BeautifulSoup import BeautifulSoup
 from pprint import PrettyPrinter
 import requests
@@ -49,8 +50,12 @@ def hasMetaValue(meta, value):
     return False
 
 
+parser = argparse.ArgumentParser(description='Scrapes "Who Wants to be Hired?" HN Posts.')
+parser.add_argument('-s','--source', help='The source url to scrape.')
+args = parser.parse_args()
 
-url = 'https://news.ycombinator.com/item?id=12016570'
+url = args.source
+
 response = requests.get(url)
 html = response.content
 

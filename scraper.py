@@ -49,7 +49,6 @@ def hasMetaValue(meta, value):
     return False
 
 
-pp = PrettyPrinter(depth=6)
 
 url = 'https://news.ycombinator.com/item?id=12016570'
 response = requests.get(url)
@@ -80,11 +79,5 @@ for row in table.findAll('table'):
     if (len(candidate) > 1):
         candidates.append(candidate)
 
-        pp.pprint(candidate)
+        PrettyPrinter(depth=6).pprint(candidate)
         print "\n"
-
-
-    #pp.pprint(candidates)
-
-    # comment = row.find('span', attrs={'class': 'comment'})
-    # print row.prettify()

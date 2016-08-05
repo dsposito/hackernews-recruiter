@@ -51,15 +51,9 @@ def hasMetaValue(meta, value):
 
 pp = PrettyPrinter(depth=6)
 
-# Production
 url = 'https://news.ycombinator.com/item?id=12016570'
 response = requests.get(url)
 html = response.content
-
-# Dev
-#import urllib
-#url = 'hn-post/wwtbh.html'
-#html = urllib.urlopen(url).read()
 
 soup = BeautifulSoup(html)
 table = soup.find('table', attrs={'class': 'comment-tree'})

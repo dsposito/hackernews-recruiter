@@ -1,7 +1,21 @@
 import argparse
 from BeautifulSoup import BeautifulSoup
+import datetime
 from pprint import PrettyPrinter
 import requests
+
+def getDefaultSourceUrl():
+    month = datetime.datetime.now().strftime("%B")
+    url = 'https://www.google.com/search?as_qdr=all&complete=0&q=hackernews%20who%20wants%20to%20be%20hired%20' + month
+
+    response = requests.get(url)
+    html = response.content
+
+    soup = BeautifulSoup(html)
+    results = soup.find('div', attrs={'id': 'search'})
+    result = results.find('cite')
+
+    return result.text
 
 def getNormalizedMetas():
     return {
@@ -55,6 +69,7 @@ parser.add_argument('-s','--source', help='The source url to scrape.')
 args = parser.parse_args()
 
 url = args.source
+url = getDefaultSourceUrl() if url is None else url
 
 response = requests.get(url)
 html = response.content

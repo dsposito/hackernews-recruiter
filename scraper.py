@@ -102,4 +102,5 @@ for row in table.findAll('table'):
     if (len(candidate) > 1):
         candidates.append(candidate)
 
-print json.dumps(candidates, indent=4, sort_keys=True)
+print "\nTotal Matches Found: " + str(len(candidates))
+print "\n" + json.dumps(candidates, indent=4, sort_keys=True)

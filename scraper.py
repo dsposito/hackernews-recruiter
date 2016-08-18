@@ -86,7 +86,10 @@ for row in table.findAll('table'):
 
     # @TODO Grab location from initial span
     for line in row.findAll('p'):
-        meta = line.text.split(':')
+        # Remove any HTML tags and rejoin matches as a string.
+        meta = ''.join(line.findAll(text=True))
+        meta = meta.split(': ')
+
         if (len(meta) == 1):
             continue
 

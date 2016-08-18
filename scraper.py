@@ -1,7 +1,7 @@
 import argparse
 from BeautifulSoup import BeautifulSoup
 import datetime
-from pprint import PrettyPrinter
+import json
 import requests
 
 def getDefaultSourceUrl():
@@ -99,5 +99,4 @@ for row in table.findAll('table'):
     if (len(candidate) > 1):
         candidates.append(candidate)
 
-        PrettyPrinter(depth=6).pprint(candidate)
-        print "\n"
+print json.dumps(candidates, indent=4, sort_keys=True)

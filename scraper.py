@@ -1,6 +1,7 @@
 import argparse
 from BeautifulSoup import BeautifulSoup
 import datetime
+from HTMLParser import HTMLParser
 import json
 import requests
 
@@ -93,7 +94,7 @@ for row in table.findAll('table'):
 
         if isSupportedMeta(name):
             name = getNormalizedMeta(name)
-            value = meta[1].strip().encode("ascii", "xmlcharrefreplace")
+            value = HTMLParser().unescape(meta[1].strip())
 
             candidate[name] = value
 

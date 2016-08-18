@@ -93,7 +93,8 @@ for row in table.findAll('table'):
         if (len(meta) == 1):
             continue
 
-        name = meta[0].strip().lower()
+        # Normalize the string (including converting any UTF8 characters to html entities).
+        name = meta[0].strip().lower().encode("ascii", "xmlcharrefreplace")
 
         if isSupportedMeta(name):
             name = getNormalizedMeta(name)

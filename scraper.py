@@ -71,6 +71,8 @@ args = parser.parse_args()
 url = args.source
 url = getDefaultSourceUrl() if url is None else url
 
+print "\nParsing Source: " + url
+
 response = requests.get(url)
 html = response.content
 

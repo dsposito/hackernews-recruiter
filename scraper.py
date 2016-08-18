@@ -90,7 +90,7 @@ for row in table.findAll('table'):
         if (len(meta) == 1):
             continue
 
-        name = meta[0].strip().lower().encode("ascii", "xmlcharrefreplace")
+        name = meta[0].strip().lower()
 
         if isSupportedMeta(name):
             name = getNormalizedMeta(name)

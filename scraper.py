@@ -111,17 +111,6 @@ def isSupportedMeta(meta):
     return False
 
 
-def hasMetaValue(meta, value):
-    if len(meta) < 4:
-        return False
-
-    for name, aliases in getNormalizedMetas().iteritems():
-        if meta == name or meta in aliases:
-            return True
-
-    return False
-
-
 def getNormalizedMetaValue(meta, value):
     if meta in [META_RELOCATE, META_REMOTE]:
         if "Yes" in value: return "Yes"

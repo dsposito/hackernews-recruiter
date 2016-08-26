@@ -131,7 +131,7 @@ def candidateMatchesFilters(candidate, filters):
             continue
 
         for filter_value in filter_values:
-            # Candidate must match one or more values for a given filter.
+            # Candidate must match one or more values for a given filter (but not all - OR not AND).
             if filter_value.lower() in candidate[filter_meta].lower():
                 matches = True
                 break

@@ -125,6 +125,11 @@ candidates = []
 for row in table.findAll("table"):
     candidate = {}
 
+    # Grab span tag for Location meta.
+    location = getMetaFromString(row.find("span", attrs={"class": "c00"}))
+    if location:
+        candidate[location["name"]] = location["value"]
+
     # Grab p tags for remaining metas.
     for line in row.findAll("p"):
         meta = getMetaFromString(line)

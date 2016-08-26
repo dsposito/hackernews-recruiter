@@ -5,6 +5,18 @@ from HTMLParser import HTMLParser
 import json
 import requests
 
+META_EMAIL = "email"
+META_GITHUB = "github"
+META_LANGUAGES = "languages"
+META_LINKEDIN = "linkedin"
+META_LOCATION = "location"
+META_RELOCATE = "relocate"
+META_REMOTE = "remote"
+META_RESUME = "resume"
+META_SITE = "site"
+META_STACKOVERFLOW = "stackoverflow"
+META_TECHNOLOGIES = "technologies"
+
 
 def getDefaultSourceUrl():
     month = datetime.datetime.now().strftime("%B")
@@ -44,31 +56,32 @@ def getMetaFromString(string):
         "value": HTMLParser().unescape(meta[1].strip())
     }
 
+
 def getNormalizedMetas():
     return {
-        "email": [],
-        "github": [],
-        "languages": [],
-        "linkedin": [],
-        "location": [],
-        "relocate": [
+        META_EMAIL: [],
+        META_GITHUB: [],
+        META_LANGUAGES: [],
+        META_LINKEDIN: [],
+        META_LOCATION: [],
+        META_RELOCATE: [
             "relocation",
             "willing to relocate"
         ],
-        "remote": [],
-        "resume": [
+        META_REMOTE: [],
+        META_RESUME: [
             "resume/cv",
             "r&#233;sum&#233;",
             "resume&#x2f;cv",
             "r&#233;sum&#233;&#x2f;cv"
         ],
-        "site": [
+        META_SITE: [
             "blog",
             "portfolio",
             "website"
         ],
-        "stackoverflow": [],
-        "technologies": [
+        META_STACKOVERFLOW: [],
+        META_TECHNOLOGIES: [
             "frameworks",
             "tech",
             "tools"

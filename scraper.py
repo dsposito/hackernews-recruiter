@@ -51,9 +51,12 @@ def getMetaFromString(string):
     if not isSupportedMeta(name):
         return False
 
+    name = getNormalizedMeta(name)
+    value = HTMLParser().unescape(meta[1].strip())
+
     return {
-        "name": getNormalizedMeta(name),
-        "value": HTMLParser().unescape(meta[1].strip())
+        "name": name,
+        "value": getNormalizedMetaValue(name, value)
     }
 
 
@@ -117,6 +120,14 @@ def hasMetaValue(meta, value):
             return True
 
     return False
+
+
+def getNormalizedMetaValue(meta, value):
+    if meta in [META_RELOCATE, META_REMOTE]:
+        if "Yes" in value: return "Yes"
+        if "No" in value or "Nope" in value: return "No"
+
+    return value
 
 
 parser = argparse.ArgumentParser(description='Scrapes "Who Wants to be Hired?" HN Posts.')

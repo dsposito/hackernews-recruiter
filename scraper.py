@@ -22,6 +22,28 @@ def getDefaultSourceUrl():
     return result.text
 
 
+def getMetaFromString(string):
+    if string is None:
+        return False
+
+    # Remove any HTML tags and rejoin matches as a string.
+    meta = "".join(string.findAll(text=True))
+    meta = meta.split(": ")
+
+    if (len(meta) == 1):
+        return False
+
+    # Normalize the string (including converting any UTF8 characters to html entities).
+    name = meta[0].strip().lower().encode("ascii", "xmlcharrefreplace")
+
+    if not isSupportedMeta(name):
+        return False
+
+    return {
+        "name": getNormalizedMeta(name),
+        "value": HTMLParser().unescape(meta[1].strip())
+    }
+
 def getNormalizedMetas():
     return {
         "email": [],
@@ -73,7 +95,6 @@ def isSupportedMeta(meta):
     return False
 
 
-# @TODO This will be non-static method on the base Dictionary object
 def hasMetaValue(meta, value):
     if len(meta) < 4:
         return False
@@ -104,23 +125,11 @@ candidates = []
 for row in table.findAll("table"):
     candidate = {}
 
-    # @TODO Grab location from initial span
+    # Grab p tags for remaining metas.
     for line in row.findAll("p"):
-        # Remove any HTML tags and rejoin matches as a string.
-        meta = "".join(line.findAll(text=True))
-        meta = meta.split(": ")
-
-        if (len(meta) == 1):
-            continue
-
-        # Normalize the string (including converting any UTF8 characters to html entities).
-        name = meta[0].strip().lower().encode("ascii", "xmlcharrefreplace")
-
-        if isSupportedMeta(name):
-            name = getNormalizedMeta(name)
-            value = HTMLParser().unescape(meta[1].strip())
-
-            candidate[name] = value
+        meta = getMetaFromString(line)
+        if (meta):
+            candidate[meta["name"]] = meta["value"]
 
     # Add candidate to list of candidates if it contains at least 2 supported metas.
     if (len(candidate) > 1):

@@ -5,9 +5,12 @@ from HTMLParser import HTMLParser
 import json
 import requests
 
+
 def getDefaultSourceUrl():
     month = datetime.datetime.now().strftime("%B")
-    url = 'https://www.google.com/search?as_qdr=all&complete=0&q=hackernews%20who%20wants%20to%20be%20hired%20' + month
+    url = 'https://www.google.com/search' \
+        + '?as_qdr=all&complete=0' \
+        + '&q=hackernews%20who%20wants%20to%20be%20hired%20' + month
 
     response = requests.get(url)
     html = response.content
@@ -18,6 +21,7 @@ def getDefaultSourceUrl():
 
     return result.text
 
+
 def getNormalizedMetas():
     return {
         "email": [],
@@ -25,12 +29,28 @@ def getNormalizedMetas():
         "languages": [],
         "linkedin": [],
         "location": [],
-        "relocate": ["relocation", "willing to relocate"],
+        "relocate": [
+            "relocation",
+            "willing to relocate"
+        ],
         "remote": [],
-        "resume": ["resume/cv", "r&#233;sum&#233;", "resume&#x2f;cv", "r&#233;sum&#233;&#x2f;cv"],
-        "site": ["blog", "portfolio", "website"],
+        "resume": [
+            "resume/cv",
+            "r&#233;sum&#233;",
+            "resume&#x2f;cv",
+            "r&#233;sum&#233;&#x2f;cv"
+        ],
+        "site": [
+            "blog",
+            "portfolio",
+            "website"
+        ],
         "stackoverflow": [],
-        "technologies": ["frameworks", "tech", "tools"]
+        "technologies": [
+            "frameworks",
+            "tech",
+            "tools"
+        ]
     }
 
 
@@ -66,7 +86,7 @@ def hasMetaValue(meta, value):
 
 
 parser = argparse.ArgumentParser(description='Scrapes "Who Wants to be Hired?" HN Posts.')
-parser.add_argument('-s','--source', help='The source url to scrape.')
+parser.add_argument('-s', '--source', help='The source url to scrape.')
 args = parser.parse_args()
 
 url = args.source

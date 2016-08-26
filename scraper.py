@@ -8,16 +8,16 @@ import requests
 
 def getDefaultSourceUrl():
     month = datetime.datetime.now().strftime("%B")
-    url = 'https://www.google.com/search' \
-        + '?as_qdr=all&complete=0' \
-        + '&q=hackernews%20who%20wants%20to%20be%20hired%20' + month
+    url = "https://www.google.com/search" \
+        + "?as_qdr=all&complete=0" \
+        + "&q=hackernews%20who%20wants%20to%20be%20hired%20" + month
 
     response = requests.get(url)
     html = response.content
 
     soup = BeautifulSoup(html)
-    results = soup.find('div', attrs={'id': 'search'})
-    result = results.find('cite')
+    results = soup.find("div", attrs={"id": "search"})
+    result = results.find("cite")
 
     return result.text
 
@@ -86,7 +86,7 @@ def hasMetaValue(meta, value):
 
 
 parser = argparse.ArgumentParser(description='Scrapes "Who Wants to be Hired?" HN Posts.')
-parser.add_argument('-s', '--source', help='The source url to scrape.')
+parser.add_argument("-s", "--source", help="The source url to scrape.")
 args = parser.parse_args()
 
 url = args.source
@@ -98,17 +98,17 @@ response = requests.get(url)
 html = response.content
 
 soup = BeautifulSoup(html)
-table = soup.find('table', attrs={'class': 'comment-tree'})
+table = soup.find("table", attrs={"class": "comment-tree"})
 
 candidates = []
-for row in table.findAll('table'):
+for row in table.findAll("table"):
     candidate = {}
 
     # @TODO Grab location from initial span
-    for line in row.findAll('p'):
+    for line in row.findAll("p"):
         # Remove any HTML tags and rejoin matches as a string.
-        meta = ''.join(line.findAll(text=True))
-        meta = meta.split(': ')
+        meta = "".join(line.findAll(text=True))
+        meta = meta.split(": ")
 
         if (len(meta) == 1):
             continue

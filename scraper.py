@@ -119,9 +119,36 @@ def getNormalizedMetaValue(meta, value):
     return value
 
 
+def candidateMatchesFilters(candidate, filters):
+    # Add candidate to list of candidates if it contains at least 2 supported metas.
+    if (len(candidate) <= 1):
+        return False
+
+    matches = True
+    for filter_meta, filter_values in filters.iteritems():
+        if filter_meta not in candidate.keys():
+            matches = False
+            continue
+
+        for filter_value in filter_values:
+            # Candidate must match one or more values for a given filter.
+            if filter_value.lower() in candidate[filter_meta].lower():
+                matches = True
+                break
+            else:
+                matches = False
+
+    return matches
+
+
 parser = argparse.ArgumentParser(description='Scrapes "Who Wants to be Hired?" HN Posts.')
 parser.add_argument("-s", "--source", help="The source url to scrape.")
+parser.add_argument("-t", "--technologies", nargs="*", help="The technology(ies) to filter on.")
 args = parser.parse_args()
+
+filters = {}
+if args.technologies is not None:
+    filters[META_TECHNOLOGIES] = args.technologies
 
 url = args.source
 url = getDefaultSourceUrl() if url is None else url
@@ -149,9 +176,8 @@ for row in table.findAll("table"):
         if (meta):
             candidate[meta["name"]] = meta["value"]
 
-    # Add candidate to list of candidates if it contains at least 2 supported metas.
-    if (len(candidate) > 1):
+    if candidateMatchesFilters(candidate, filters):
         candidates.append(candidate)
 
-print "\nTotal Matches Found: " + str(len(candidates))
 print "\n" + json.dumps(candidates, indent=4, sort_keys=True)
+print "\nTotal Matches Found: " + str(len(candidates))

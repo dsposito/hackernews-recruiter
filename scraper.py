@@ -128,7 +128,7 @@ def candidateMatchesFilters(candidate, filters):
     for filter_meta, filter_values in filters.iteritems():
         if filter_meta not in candidate.keys():
             matches = False
-            continue
+            break
 
         for filter_value in filter_values:
             # Candidate must match one or more values for a given filter (but not all - OR not AND).
@@ -137,6 +137,9 @@ def candidateMatchesFilters(candidate, filters):
                 break
             else:
                 matches = False
+
+        if not matches:
+            break;
 
     return matches
 

@@ -113,8 +113,8 @@ def isSupportedMeta(meta):
 
 def getNormalizedMetaValue(meta, value):
     if meta in [META_RELOCATE, META_REMOTE]:
-        if "Yes" in value: return "Yes"
-        if "No" in value or "Nope" in value: return "No"
+        if "yes" in value.lower(): return "Yes"
+        if "no" in value.lower() or "nope" in value.lower(): return "No"
 
     return value
 

@@ -15,7 +15,44 @@ Run the following command to install the project's dependencies:
 Use the `-s` or `--source` param to specify a Hacker News thread URL to parse.
 If none is provided, the current month's Hacker News post will be parsed.
 
-	$ python scraper.py --source https://news.ycombinator.com/item?id=12016570
+	$ python scraper.py --source https://news.ycombinator.com/item?id=10152811
+
+**Example Output**
+```
+Parsing Source: https://news.ycombinator.com/item?id=10152811
+
+[
+    {
+        "email": "angieyeh24@gmail.com",
+        "location": "Los Angeles, CA",
+        "relocate": "Yes",
+        "remote": "No",
+        "resume": "https://docs.google.com/document/d/1Rlb3-gbr3nhfBAaxyJOwRlEC...",
+        "technologies": "Javascript, Node, React, Angular, MySQL, MongoDB, HTML/CSS, Mocha/Tape for testing"
+    },
+    {
+        "email": "nikitaame@gmail.com",
+        "location": "Los Angeles, CA",
+        "relocate": "Yes",
+        "remote": "No",
+        "resume": "Upon Request",
+        "technologies": "iOS(Swift & Objective C), Android(Java), Web (HTML, CSS, Javascript, C, C++, SQL, OpenCV"
+    },
+    {
+        "email": "philt300 at yahoo",
+        "location": "Greater Los Angeles Area, CA",
+        "relocate": "Yes",
+        "remote": "Yes",
+        "resume": "https://www.linkedin.com/in/theoapps",
+        "technologies": "Swift, Objective-C, iOS, Java, J2EE, Android, Javascript, C++, Git"
+    },
+    ...
+]
+
+Parsed Source: Ask HN: Who wants to be hired? (July 2016)
+
+Total Matches Found: 130
+```
 
 
 Results can be filtered on various candidate meta data. For example, to filter results to candidates with "PHP" skills in the "Technologies" meta key:

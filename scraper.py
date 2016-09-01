@@ -157,6 +157,7 @@ parser.add_argument("-s", "--source", help="The source url to scrape.")
 parser.add_argument("-t", "--technologies", nargs="*", help="The technology(ies) to filter on.")
 parser.add_argument("-l", "--location", nargs="*", help="The location(s) to filter on.")
 parser.add_argument("-rel", "--relocate", action='store_true', help="Applies a filter of 'willing to relocate' = Yes.")
+parser.add_argument("-rem", "--remote", action='store_true', help="Applies a filter of 'willing to work remotely' = Yes.")
 args = parser.parse_args()
 
 filters = {}
@@ -166,6 +167,8 @@ if args.location is not None:
     filters[META_LOCATION] = args.location
 if args.relocate:
     filters[META_RELOCATE] = "Yes"
+if args.remote:
+    filters[META_REMOTE] = "Yes"
 
 url = args.source
 url = getDefaultSourceUrl() if url is None else url

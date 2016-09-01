@@ -65,6 +65,11 @@ One or more values may be provided for each meta filter. The following will retu
 	$ python scraper.py --technologies "PHP" "Python"
 
 
+The following will return all candidates with "Los Angeles" in the "Location" meta key OR candidates that are willing to relocate (Relocate=Yes):
+
+	$ python scraper.py --location "Los Angeles" --relocate
+
+
 Run the following command to see all possible parameters for `scraper.py`:
 
 	$ python scraper.py --help

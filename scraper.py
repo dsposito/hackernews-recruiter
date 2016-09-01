@@ -1,6 +1,6 @@
-import argparse
+from argparse import ArgumentParser
 from BeautifulSoup import BeautifulSoup
-import datetime
+from datetime import datetime
 from HTMLParser import HTMLParser
 import json
 import requests
@@ -19,7 +19,7 @@ META_TECHNOLOGIES = "technologies"
 
 
 def getDefaultSourceUrl():
-    month = datetime.datetime.now().strftime("%B %Y")
+    month = datetime.now().strftime("%B %Y")
     url = "https://www.google.com/search" \
         + "?as_qdr=all&complete=0" \
         + "&q=hackernews%20who%20wants%20to%20be%20hired%20" + month
@@ -152,7 +152,7 @@ def candidateMatchesFilters(candidate, filters):
     return matches
 
 
-parser = argparse.ArgumentParser(description='Scrapes "Who Wants to be Hired?" HN Posts.')
+parser = ArgumentParser(description='Scrapes "Who Wants to be Hired?" HN Posts.')
 parser.add_argument("-s", "--source", help="The source url to scrape.")
 parser.add_argument("-t", "--technologies", nargs="*", help="The technology(ies) to filter on.")
 parser.add_argument("-l", "--location", nargs="*", help="The location(s) to filter on.")

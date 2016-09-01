@@ -19,7 +19,7 @@ META_TECHNOLOGIES = "technologies"
 
 
 def getDefaultSourceUrl():
-    month = datetime.datetime.now().strftime("%B")
+    month = datetime.datetime.now().strftime("%B %Y")
     url = "https://www.google.com/search" \
         + "?as_qdr=all&complete=0" \
         + "&q=hackernews%20who%20wants%20to%20be%20hired%20" + month

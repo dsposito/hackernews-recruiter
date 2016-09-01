@@ -20,12 +20,12 @@ If none is provided, the current month's Hacker News post will be parsed.
 
 Results can be filtered on various candidate meta data. For example, to filter results to candidates with "PHP" skills in the "Technologies" meta key:
 
-	$ python scraper.py --source https://news.ycombinator.com/item?id=12016570 --technologies "PHP"
+	$ python scraper.py --technologies "PHP"
 
 
 One or more values may be provided for each meta filter. The following will return all candidates with "PHP" OR "Python" skills in the "Technologies" meta key:
 
-	$ python scraper.py --source https://news.ycombinator.com/item?id=12016570 --technologies "PHP" "Python"
+	$ python scraper.py --technologies "PHP" "Python"
 
 
 Run the following command to see all possible parameters for `scraper.py`:

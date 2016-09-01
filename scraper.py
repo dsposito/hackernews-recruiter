@@ -130,6 +130,8 @@ def candidateMatchesFilters(candidate, filters):
             matches = False
             break
 
+        filter_values = filter_values.split() if isinstance(filter_values, basestring) else filter_values
+
         for filter_value in filter_values:
             # Candidate must match one or more values for a given filter (but not all - OR not AND).
             if filter_value.lower() in candidate[filter_meta].lower():

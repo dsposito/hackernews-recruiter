@@ -141,7 +141,13 @@ def candidateMatchesFilters(candidate, filters):
                 matches = False
 
         if not matches:
-            break;
+            # Set match if "location" filter fails but "relocate" filter is present.
+            if (  filter_meta == META_LOCATION
+              and META_RELOCATE in filters
+              and candidate[META_RELOCATE] == "Yes"):
+                matches = True
+            else:
+                break;
 
     return matches
 
@@ -150,6 +156,7 @@ parser = argparse.ArgumentParser(description='Scrapes "Who Wants to be Hired?" H
 parser.add_argument("-s", "--source", help="The source url to scrape.")
 parser.add_argument("-t", "--technologies", nargs="*", help="The technology(ies) to filter on.")
 parser.add_argument("-l", "--location", nargs="*", help="The location(s) to filter on.")
+parser.add_argument("-rel", "--relocate", action='store_true', help="Applies a filter of 'willing to relocate' = Yes.")
 args = parser.parse_args()
 
 filters = {}
@@ -157,6 +164,8 @@ if args.technologies is not None:
     filters[META_TECHNOLOGIES] = args.technologies
 if args.location is not None:
     filters[META_LOCATION] = args.location
+if args.relocate:
+    filters[META_RELOCATE] = "Yes"
 
 url = args.source
 url = getDefaultSourceUrl() if url is None else url

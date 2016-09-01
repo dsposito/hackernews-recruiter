@@ -144,11 +144,14 @@ def candidateMatchesFilters(candidate, filters):
 parser = argparse.ArgumentParser(description='Scrapes "Who Wants to be Hired?" HN Posts.')
 parser.add_argument("-s", "--source", help="The source url to scrape.")
 parser.add_argument("-t", "--technologies", nargs="*", help="The technology(ies) to filter on.")
+parser.add_argument("-l", "--location", nargs="*", help="The location(s) to filter on.")
 args = parser.parse_args()
 
 filters = {}
 if args.technologies is not None:
     filters[META_TECHNOLOGIES] = args.technologies
+if args.location is not None:
+    filters[META_LOCATION] = args.location
 
 url = args.source
 url = getDefaultSourceUrl() if url is None else url

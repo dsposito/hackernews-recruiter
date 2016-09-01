@@ -180,4 +180,5 @@ for row in table.findAll("table"):
         candidates.append(candidate)
 
 print "\n" + json.dumps(candidates, indent=4, sort_keys=True)
+print "\nParsed Source: " + soup.find("a", attrs={"class": "storylink"}).text
 print "\nTotal Matches Found: " + str(len(candidates))

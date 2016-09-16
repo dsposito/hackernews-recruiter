@@ -15,7 +15,7 @@ Run the following command to install the project's dependencies:
 Use the `-s` or `--source` param to specify a Hacker News thread URL to parse.
 If none is provided, the current month's Hacker News post will be parsed.
 
-	$ python scraper.py --source https://news.ycombinator.com/item?id=10152811
+	$ ./recruit --source https://news.ycombinator.com/item?id=10152811
 
 **Example Output**
 ```
@@ -57,19 +57,19 @@ Total Matches Found: 130
 
 Results can be filtered on various candidate meta data. For example, to filter results to candidates with "PHP" skills in the "Technologies" meta key:
 
-	$ python scraper.py --technologies "PHP"
+	$ ./recruit --technologies "PHP"
 
 
 One or more values may be provided for each meta filter. The following will return all candidates with "PHP" OR "Python" skills in the "Technologies" meta key:
 
-	$ python scraper.py --technologies "PHP" "Python"
+	$ ./recruit --technologies "PHP" "Python"
 
 
 The following will return all candidates with "Los Angeles" in the "Location" meta key OR candidates that are willing to relocate (Relocate=Yes):
 
-	$ python scraper.py --location "Los Angeles" --relocate
+	$ ./recruit --location "Los Angeles" --relocate
 
 
 Run the following command to see all possible parameters for `scraper.py`:
 
-	$ python scraper.py --help
+	$ ./recruit --help

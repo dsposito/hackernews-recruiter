@@ -1,0 +1,12 @@
+class Candidate(object):
+    META_EMAIL = "email"
+    META_GITHUB = "github"
+    META_LANGUAGES = "languages"
+    META_LINKEDIN = "linkedin"
+    META_LOCATION = "location"
+    META_RELOCATE = "relocate"
+    META_REMOTE = "remote"
+    META_RESUME = "resume"
+    META_SITE = "site"
+    META_STACKOVERFLOW = "stackoverflow"
+    META_TECHNOLOGIES = "technologies"

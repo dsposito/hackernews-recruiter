@@ -1,5 +1,5 @@
 # hackernews-recruiter
-Scrapes "Who Wants to be Hired?" HN Posts
+This CLI tool scrapes "Who Wants to be Hired?" Hacker News posts to make it easier to find developers that are looking for new opportunities. Candidates can be filtered by tech skills and geographic location.
 
 ## Installation
 
